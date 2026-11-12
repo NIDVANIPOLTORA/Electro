@@ -1,0 +1,16 @@
+name: Docker build
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Получить код
+        uses: actions/checkout@v4
+
+      - name: Собрать Docker-образ бэкенда
+        run: docker build -t electro-backend ./backend

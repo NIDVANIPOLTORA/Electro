@@ -1,0 +1,10 @@
+deploy/certs/*
+!deploy/certs/.gitkeep
+deploy/secrets/*
+!deploy/secrets/*.example
+.env
+.env.*
+!.env.example
+.venv/
+__pycache__/
+data/

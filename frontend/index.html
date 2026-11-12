@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>WattUp — магазин электротехники</title>
+  <meta name="description" content="Кабели, розетки, автоматика, освещение и инструмент для электромонтажа">
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <header class="top">
+    <a class="logo" href="/">WattUp</a>
+    <nav>
+      <a href="/admin.html">Админ</a>
+      <button id="cart-btn" class="cart-btn">Корзина <span id="cart-count">0</span></button>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero">
+      <h1>Электротехника для дома и монтажа</h1>
+      <p>Кабели, розетки, автоматика, освещение и инструмент</p>
+      <small id="info">загрузка…</small>
+    </section>
+
+    <div id="chips" class="chips"></div>
+    <div id="grid" class="grid"></div>
+  </main>
+
+  <aside id="cart" class="cart" hidden>
+    <div class="cart-head">
+      <h2>Корзина</h2>
+      <button id="cart-close" class="link">✕</button>
+    </div>
+    <ul id="cart-list"></ul>
+    <p class="total">Итого: <b id="cart-total">0</b> ₽</p>
+    <form id="order-form">
+      <input id="f-name" placeholder="Ваше имя" required minlength="2" maxlength="80">
+      <input id="f-phone" placeholder="Телефон" required>
+      <button class="primary">Оформить заказ</button>
+    </form>
+    <p id="msg" class="msg"></p>
+  </aside>
+
+  <script src="/app.js"></script>
+</body>
+</html>
