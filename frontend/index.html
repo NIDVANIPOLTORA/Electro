@@ -5,41 +5,62 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>WattUp — магазин электротехники</title>
   <meta name="description" content="Кабели, розетки, автоматика, освещение и инструмент для электромонтажа">
-  <link rel="stylesheet" href="/style.css">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            accent: '#f59e0b',
+            dark: '#1f2937',
+            muted: '#667085',
+          },
+          fontFamily: {
+            sans: ['system-ui', 'sans-serif'],
+          },
+        },
+      },
+    };
+  </script>
 </head>
-<body>
-  <header class="top">
-    <a class="logo" href="/">WattUp</a>
-    <nav>
-      <a href="/admin.html">Админ</a>
-      <button id="cart-btn" class="cart-btn">Корзина <span id="cart-count">0</span></button>
+<body class="m-0 bg-[#f6f7f9] text-[#1d2330] font-sans">
+
+  <header class="flex justify-between items-center px-6 py-3.5 bg-dark">
+    <a class="font-bold text-xl text-white no-underline" href="/">WattUp</a>
+    <nav class="flex gap-4 items-center">
+      <a href="/admin.html" class="text-white no-underline">Админ</a>
+      <button id="cart-btn" class="bg-accent text-[#1d2330] border-0 rounded-lg px-3.5 py-2 cursor-pointer font-semibold">
+        Корзина <span id="cart-count">0</span>
+      </button>
     </nav>
   </header>
 
-  <main>
-    <section class="hero">
-      <h1>Электротехника для дома и монтажа</h1>
-      <p>Кабели, розетки, автоматика, освещение и инструмент</p>
-      <small id="info">загрузка…</small>
+  <main class="max-w-[1100px] mx-auto px-4 pt-6 pb-16">
+    <section class="bg-gradient-to-br from-dark to-gray-700 text-white p-8 rounded-2xl mb-6">
+      <h1 class="m-0 mb-2 text-3xl font-bold">Электротехника для дома и монтажа</h1>
+      <p class="m-0 mb-2.5 text-gray-300">Кабели, розетки, автоматика, освещение и инструмент</p>
+      <small id="info" class="text-gray-400">загрузка…</small>
     </section>
 
-    <div id="chips" class="chips"></div>
-    <div id="grid" class="grid"></div>
+    <div id="chips" class="flex flex-wrap gap-2 mb-5"></div>
+    <div id="grid" class="grid grid-cols-[repeat(auto-fill,minmax(240px,1fr))] gap-4"></div>
   </main>
 
-  <aside id="cart" class="cart" hidden>
-    <div class="cart-head">
-      <h2>Корзина</h2>
-      <button id="cart-close" class="link">✕</button>
+  <aside id="cart" class="fixed right-0 top-0 h-full w-[min(380px,100%)] bg-white p-5 shadow-[-4px_0_20px_rgba(0,0,0,0.2)] overflow-auto z-10" hidden>
+    <div class="flex justify-between items-center">
+      <h2 class="text-xl font-bold m-0">Корзина</h2>
+      <button id="cart-close" class="bg-transparent border-0 text-lg cursor-pointer">✕</button>
     </div>
-    <ul id="cart-list"></ul>
+    <ul id="cart-list" class="list-none p-0"></ul>
     <p class="total">Итого: <b id="cart-total">0</b> ₽</p>
-    <form id="order-form">
-      <input id="f-name" placeholder="Ваше имя" required minlength="2" maxlength="80">
-      <input id="f-phone" placeholder="Телефон" required>
-      <button class="primary">Оформить заказ</button>
+    <form id="order-form" class="flex flex-col gap-2">
+      <input id="f-name" placeholder="Ваше имя" required minlength="2" maxlength="80"
+             class="p-2.5 border border-gray-300 rounded-lg text-[15px]">
+      <input id="f-phone" placeholder="Телефон" required
+             class="p-2.5 border border-gray-300 rounded-lg text-[15px]">
+      <button class="bg-accent border-0 rounded-lg px-3.5 py-2.5 font-semibold cursor-pointer">Оформить заказ</button>
     </form>
-    <p id="msg" class="msg"></p>
+    <p id="msg" class="msg min-h-[20px] text-sm"></p>
   </aside>
 
   <script src="/app.js"></script>

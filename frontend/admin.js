@@ -9,22 +9,52 @@ document.getElementById("login").addEventListener("submit", async (e) => {
     headers: { "X-Admin-Password": document.getElementById("pwd").value },
   });
   const data = await r.json();
-  if (!r.ok) { msg.className = "msg err"; msg.textContent = data.error || "Ошибка"; return; }
-  msg.className = "msg ok";
+
+  if (!r.ok) {
+    msg.className = "msg min-h-[20px] text-sm text-[#b42318]";
+    msg.textContent = data.error || "Ошибка";
+    return;
+  }
+
+  msg.className = "msg min-h-[20px] text-sm text-[#067647]";
   msg.textContent = data.length ? `Заказов: ${data.length}` : "Заказов пока нет";
 
   const table = document.createElement("table");
+  table.className = "w-full border-collapse bg-white rounded-xl overflow-hidden";
+
   const head = table.insertRow();
   ["№", "Дата", "Клиент", "Состав", "Сумма"].forEach((t) => {
-    const th = document.createElement("th"); th.textContent = t; head.appendChild(th);
+    const th = document.createElement("th");
+    th.className =
+      "text-left px-3 py-2.5 border-b border-[#eee] text-sm align-top bg-[#f2f4f7] font-semibold";
+    th.textContent = t;
+    head.appendChild(th);
   });
+
   data.forEach((o) => {
     const row = table.insertRow();
-    row.insertCell().textContent = o.id;
-    row.insertCell().textContent = o.created.replace("T", " ").replace("+00:00", " UTC");
-    row.insertCell().textContent = `${o.name}, ${o.phone}`;
-    row.insertCell().textContent = o.items.map((i) => `${i.name} × ${i.qty}`).join("; ");
-    row.insertCell().textContent = money(o.total) + " ₽";
+    const cellClass = "text-left px-3 py-2.5 border-b border-[#eee] text-sm align-top";
+
+    let c = row.insertCell();
+    c.className = cellClass;
+    c.textContent = o.id;
+
+    c = row.insertCell();
+    c.className = cellClass;
+    c.textContent = o.created.replace("T", " ").replace("+00:00", " UTC");
+
+    c = row.insertCell();
+    c.className = cellClass;
+    c.textContent = `${o.name}, ${o.phone}`;
+
+    c = row.insertCell();
+    c.className = cellClass;
+    c.textContent = o.items.map((i) => `${i.name} × ${i.qty}`).join("; ");
+
+    c = row.insertCell();
+    c.className = cellClass;
+    c.textContent = money(o.total) + " ₽";
   });
+
   box.appendChild(table);
 });
